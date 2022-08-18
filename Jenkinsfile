@@ -4,7 +4,7 @@ node {
 
     docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
 
-        def customImage = docker.build("msinfy/nodejs")
+        def customImage = docker.build("mdshafiy/nodejs") /* docker hub */
 
         /* Push the container to the custom Registry */
         customImage.push()
