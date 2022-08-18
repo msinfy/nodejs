@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        def customImage = docker.build("mdshafi/nodejs/") 
+       app = docker.build("mdshafi/nodejs/") 
     }
 
    
