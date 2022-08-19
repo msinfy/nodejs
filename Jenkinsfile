@@ -55,12 +55,12 @@ pipeline {
         } 
         
         
-       stage ('K8S Deploy') {
+       stage ('gke Deploy') {
         steps {
             script {
                 kubernetesDeploy(
                     configs: 'gke.yaml',
-                    kubeconfigId: 'k8s',
+                    kubeconfigId: 'gke',
                     enableConfigSubstitution: true
                     )           
                
