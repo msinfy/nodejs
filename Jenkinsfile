@@ -13,10 +13,7 @@ node {
         app = docker.build("mdshafi/nodejs")
     }
 
-    stage('Test image') {
-        
-       
-    }
+   
 
     stage('Push image') {
         /* 
@@ -28,5 +25,4 @@ node {
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
-    
 }
