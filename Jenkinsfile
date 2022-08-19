@@ -6,7 +6,7 @@ pipeline {
 
         registryCredential = 'dockerhub'
 
-    }
+                 }
 
     agent any 
 
@@ -18,9 +18,9 @@ pipeline {
 
                 git 'https://github.com/msinfy/nodejs.git' 
 
-            }
+                   }
 
-        } 
+                                } 
 
         stage('Building our image') { 
 
@@ -46,13 +46,13 @@ pipeline {
 
                         dockerImage.push() 
 
-                    }
+                         }
 
-                } 
+                      } 
 
-            }
+                }
 
-        } 
+        }
 
         stage ('K8S Deploy') {
         steps {
@@ -65,7 +65,7 @@ pipeline {
                
             }
         }
-    }
+    
         
 
     }
