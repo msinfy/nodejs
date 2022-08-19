@@ -22,7 +22,7 @@ pipeline {
 
                                 } 
 
-        stage('Building our image from source docker') { 
+        stage('Building our image') { 
 
             steps { 
 
@@ -39,8 +39,8 @@ pipeline {
         stage('Deploy our image') { 
 
             steps { 
-                
-               script { 
+
+                script { 
 
                     docker.withRegistry( '', registryCredential ) { 
 
@@ -53,23 +53,9 @@ pipeline {
             }
 
         } 
-        
-        
-             stage ('K8S Deploy') {
-        steps {
-            script {
-                kubernetesDeploy(
-                    configs: 'gke.yaml',
-                    kubeconfigId: 'k8s',
-                    enableConfigSubstitution: true
-                    )           
-               
-            }
-        }
-                 
-                 
-        }
-        
+
+
     }
-        
+
+}
         
