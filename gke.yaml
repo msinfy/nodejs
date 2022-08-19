@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: mdshafi/nodejs:20
+        image: nginx
         ports:
         - containerPort: 80
