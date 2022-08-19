@@ -20,7 +20,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("DOCKER-HUB-USERNAME/nodejs:${env.BUILD_ID}")
+                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
                 }
             }
         }
