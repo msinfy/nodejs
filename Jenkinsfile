@@ -5,6 +5,10 @@ pipeline {
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
+        PROJECT_ID = 'ornate-serenity-355411'
+        CLUSTER_NAME = 'autopilot-cluster-1'
+        LOCATION = 'us-central1'
+        CREDENTIALS_ID = 'gke'
 
                  }
 
@@ -55,18 +59,14 @@ pipeline {
         } 
         
         
-       stage ('gke Deploy') {
-        steps {
-            script {
-                kubernetesDeploy(
-                    configs: 'gke.yaml',
-                    kubeconfigId: 'gke',
-                    enableConfigSubstitution: true
-                    )           
-               
-            }
+       stage('Deploy to GKE') {
+            steps{
+                sh "sed -i 's/nodejs:latest/nodejs:${env.BUILD_ID}/g' gke.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
         }
-    }
+               
+        
+      
         
         
         
