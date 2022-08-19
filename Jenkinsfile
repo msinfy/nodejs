@@ -1,7 +1,7 @@
-pipeline { 
-
-    environment { 
-
+pipeline {
+    agent any
+    environment {
+      
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
@@ -10,71 +10,35 @@ pipeline {
         LOCATION = 'us-central1'
         CREDENTIALS_ID = 'gke'
 
-                 }
-
-    agent any 
-
-    stages { 
-
-        stage('Cloning our Git checkout') { 
-
-            steps { 
-
-                git 'https://github.com/msinfy/nodejs.git' 
-
-                   }
-
-                                } 
-
-        stage('Building our image') { 
-
-            steps { 
-
-                script { 
-
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-
-                }
-
-            } 
-
-        }
-
-        stage('Deploy our image') { 
-
-            steps { 
-
-                script { 
-
-                    docker.withRegistry( '', registryCredential ) { 
-
-                        dockerImage.push() 
-
-                    }
-
-                } 
-
-            }
-
-        } 
-        
-        
-       stage('Deploy to GKE') {
-            steps{
-               
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'gke.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-        }
-           
-       }
-               
-        
-      
-        
-        
-        
-
-
     }
-
+    stages {
+        stage("Checkout code") {
+            steps {
+                checkout scm
+            }
+        }
+        stage("Build image") {
+            steps {
+                script {
+                    myapp = docker.build("DOCKER-HUB-USERNAME/nodejs:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage("Push image") {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            myapp.push("latest")
+                            myapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
+        stage('Deploy to GKE') {
+            steps{
+                sh "sed -i 's/nodejs:latest/nodejs:${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'gke.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+            }
+        }
+    }
 }
-        
