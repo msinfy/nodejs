@@ -12,7 +12,7 @@ pipeline {
 
     stages { 
 
-        stage('Cloning our Git') { 
+        stage('Cloning our Git checkout') { 
 
             steps { 
 
@@ -22,7 +22,7 @@ pipeline {
 
                                 } 
 
-        stage('Building our image') { 
+        stage('Building our image from source docker') { 
 
             steps { 
 
