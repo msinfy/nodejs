@@ -35,7 +35,7 @@ pipeline {
         stage('Deploy to GKE') {
             steps{
                 
-               kubernetesDeploy(configs: 'gke.yaml',kubeconfigId: 'k8s')
+               kubernetesDeploy(configs: 'aks.yaml',kubeconfigId: 'k8s')
             }
         }
     }
