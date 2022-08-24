@@ -2,22 +2,22 @@
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: nodejs
+  name: nginx
 spec:
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: nodejs
+      app: nginx
   replicas: 1 # tells deployment to run 1 pods matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
-        app: nodejs
+        app: nginx
     spec:
       containers:
-      - name: nodejs
-        image: mdshafi/nodejs:latest
+      - name: nginx
+        image: nginx
         ports:
         - containerPort: 80
        
