@@ -35,11 +35,13 @@ pipeline {
         stage('Deploy to  ...   aks') {
             steps{
                 script{
-               kubernetesDeploy(
-                     configs: 'aks.yaml',
-                     kubeconfigId: 'k8s',
-                     enableConfigSubstitution:true
-                     )
+             
+               
+               kubernetesDeploy (configs: 'aks.yaml',  kubeConfig: [path: ''], kubeconfigId: 'k8s', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://'])
+               
+               
+               
+               
                }
             }
         }
