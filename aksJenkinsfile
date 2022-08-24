@@ -34,8 +34,9 @@ pipeline {
         }
         stage('Deploy to  ...   aks') {
             steps{
-                
+                script{
                kubernetesDeploy(configs:'aks.yaml,kubeconfigId:'k8s',enableConfigSubstitution:true)
+               }
             }
         }
     }
