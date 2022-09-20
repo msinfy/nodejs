@@ -37,7 +37,16 @@ pipeline {
         stage('Deploy to GKE') {
             steps{
                 
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'gke.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                //gke
+                //step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'gke.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                
+                #aks
+                script{
+                        kubernetesDeploy(configs: 'aks.yaml', kubeconfigId: 'K8S', enableConfigSubstitution: true )                    
+                }
+                
+                
+                
             }
         }
     }
