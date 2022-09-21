@@ -11,18 +11,17 @@ pipeline {
         CREDENTIALS_ID = 'gke'
 
     }
-    stages {
+     stages {
         stage("Checkout code") {
             steps {
                 checkout scm
             }
         }
-        
-        
+            }
         stage("Build image") {
             steps {
                 script {
-                   // myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
+                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
                 }
             }
         }
@@ -35,17 +34,20 @@ pipeline {
                     }
                 }
             }
-         }
-        stage('Deploy to GKE') {
+        }
+        stage('Deploy to  ...   aks') {
             steps{
-                
+                script{
+             
+               
+             
                 //gke
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'gke.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-                
-                             
-                
+    }
+               
+               
+               }
             }
-        
         }
     }
 }
