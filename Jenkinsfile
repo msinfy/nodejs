@@ -5,13 +5,11 @@ pipeline {
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
-        PROJECT_ID = 'ornate-serenity-355411'
-        CLUSTER_NAME = 'autopilot-cluster-1'
-        LOCATION = 'us-central1'
-        CREDENTIALS_ID = 'gke'
+      
+        CREDENTIALS_ID = 'k8s'
 
     }
-     stages {
+    stages {
         stage("Checkout code") {
             steps {
                 checkout scm
@@ -41,8 +39,8 @@ pipeline {
              
                
              
-                //gke
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'gke.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+               withKubeConfig([credentialsId: 'k8s', serverUrl: 'https://aks-dns-9582e450.hcp.centralindia.azmk8s.io']) {
+      sh 'kubectl apply -f aks.yaml'
     }
                
                
