@@ -5,7 +5,7 @@ pipeline {
   tools {
     
    
-   dokcer 'docker'   
+   docker 'docker'   
       
   }
   
