@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
       
-           def dockerHome = tool 'docker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+        def dockerHome = tool 'docker'
+       
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
