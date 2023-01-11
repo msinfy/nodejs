@@ -4,7 +4,7 @@ pipeline {
     
     tools{
         
-     docker 'dok'   
+     dockerTool 'docker'   
     }
   
     
@@ -26,7 +26,7 @@ pipeline {
        stage("Build image") {
             steps {
                 script {
-                    myapp = dok.build("mdshafi/nodejs:${env.BUILD_ID}")
+                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    dok.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
