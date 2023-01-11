@@ -1,11 +1,15 @@
 pipeline {
     agent any
     
+      tools{
+        
+        dockerTool 'docker'
+    }
     
   
     environment {
              
-        tool 'docker' = "docker"
+       
      
         
         registry = "mdshafi/nodejs" 
