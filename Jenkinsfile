@@ -3,7 +3,7 @@ pipeline {
     
      tools {
     
-   docker 'docker' 
+   dockertool 'docker' 
   }
     
     environment {
