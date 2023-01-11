@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment {
       
+           def dockerHome = tool 'docker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
@@ -22,13 +24,7 @@ pipeline {
         env.PATH = "${dockerHome}/bin:${env.PATH}"
        }
             
-        stage("Build image") {
-            steps {
-                script {
-                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
-                }
-            }
-        }
+
 
         stage("Push image") {
             steps {
