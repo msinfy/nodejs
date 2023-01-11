@@ -1,15 +1,12 @@
 pipeline {
     agent any
     
-     tools {
-    
-   docker 'dok' 
-  }
+  
     
     environment {
       
 
-       
+       def dockerhost = tool docker
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'docker'
@@ -28,7 +25,7 @@ pipeline {
        stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
+                    myapp = dockerhost.build("mdshafi/nodejs:${env.BUILD_ID}")
                 }
             }
         }
@@ -36,7 +33,7 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhost') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
