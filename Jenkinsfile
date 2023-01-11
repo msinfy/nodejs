@@ -7,7 +7,7 @@ pipeline {
     environment {
              
         def dockerHome = tool 'docker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+     
         
         registry = "mdshafi/nodejs" 
         registryCredential = 'dockerhub'      
