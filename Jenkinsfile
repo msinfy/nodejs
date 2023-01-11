@@ -21,7 +21,7 @@ pipeline {
          stage("initialize") {
              steps {
                  
-              sh  'systemctl start docker'
+              sh  'sudo service docker start'
              }
          }
          
