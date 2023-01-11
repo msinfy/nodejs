@@ -18,13 +18,7 @@ pipeline {
     
      stages {
          
-         stage("initialize") {
-             steps {
-                 
-              sh  'sudo service docker start'
-             }
-         }
-         
+                  
         stage("Checkout code") {
             steps {
                 checkout scm
