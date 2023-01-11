@@ -1,6 +1,13 @@
 pipeline {
     agent any
     
+    
+  tools {
+    
+   
+   dokcer 'docker'   
+      
+  }
   
     
     environment {
