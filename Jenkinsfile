@@ -28,7 +28,7 @@ pipeline {
        stage("Build image") {
             steps {
                 script {
-                    myapp = sudo docker.build("mdshafi/nodejs:${env.BUILD_ID}")
+                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
                 }
             }
         }
