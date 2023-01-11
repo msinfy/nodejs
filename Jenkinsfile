@@ -6,7 +6,7 @@ pipeline {
     environment {
       
 
-        def dockerhost = tool docker
+        def docker = tool docker
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
