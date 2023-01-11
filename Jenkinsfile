@@ -5,7 +5,7 @@ pipeline {
   tools {
     
    
-   DockerTool "docker"
+   DockerTool
       
   }
   
