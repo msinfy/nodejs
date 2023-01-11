@@ -8,10 +8,8 @@ pipeline {
     
   
     environment {
-             
-       
-     
-        
+                 
+            
         registry = "mdshafi/nodejs" 
         registryCredential = 'dockerhub'      
         CREDENTIALS_ID = 'k8s'
@@ -19,6 +17,14 @@ pipeline {
               }
     
      stages {
+         
+         stage("initialize") {
+             steps {
+                 
+              sh  'systemctl start docker'
+             }
+         }
+         
         stage("Checkout code") {
             steps {
                 checkout scm
