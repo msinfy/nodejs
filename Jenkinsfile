@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
       
-        def dockerHome = tool 'docker'
+        def dt = tool 'docker'
        
         registry = "mdshafi/nodejs" 
 
@@ -22,7 +22,7 @@ pipeline {
        stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("mdshafi/nodejs:${env.BUILD_ID}")
+                    myapp = dt.build("mdshafi/nodejs:${env.BUILD_ID}")
                 }
             }
         }
