@@ -6,7 +6,7 @@ pipeline {
        
         registry = "mdshafi/nodejs" 
 
-        registryCredential = 'dockerhub'
+        registryCredential = 'docker'
       
         CREDENTIALS_ID = 'k8s'
 
