@@ -8,14 +8,15 @@ pipeline {
       
         CREDENTIALS_ID = 'k8s'
 
-    }
-    stages {
+              }
+    
+     stages {
         stage("Checkout code") {
             steps {
                 checkout scm
             }
         }
-            }
+            
         stage("Build image") {
             steps {
                 script {
@@ -23,6 +24,7 @@ pipeline {
                 }
             }
         }
+
         stage("Push image") {
             steps {
                 script {
@@ -32,7 +34,7 @@ pipeline {
                     }
                 }
             }
-        }
+        
         stage('Deploy to  ...   aks') {
             steps{
                 script{
@@ -41,11 +43,10 @@ pipeline {
              
                withKubeConfig([credentialsId: 'k8s', serverUrl: 'https://aks-dns-9582e450.hcp.centralindia.azmk8s.io']) {
       sh 'kubectl apply -f aks.yaml'
-    }
+                     }
                
                
-               }
-            }
+                 }
+              }
         }
     }
-}
