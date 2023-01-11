@@ -2,14 +2,13 @@ pipeline {
     agent any
     
     
-    tools{
-        
-    DockerTool 'dok'   
-    }
-  
+   
     
     environment {
              
+        def dockerHome = tool 'docker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+        
         registry = "mdshafi/nodejs" 
         registryCredential = 'dockerhub'      
         CREDENTIALS_ID = 'k8s'
