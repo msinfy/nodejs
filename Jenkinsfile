@@ -32,20 +32,7 @@ pipeline {
             }
           }
         
-        stage('Deploy to  ...   aks') {
-            steps{
-                script{
-             
-                          
-               withKubeConfig([credentialsId: 'k8s', serverUrl: 'https://aks-dns-9582e450.hcp.centralindia.azmk8s.io']) {
-      sh 'kubectl apply -f aks.yaml'
-                     }
-               
-               
-                 }
-              }
-        }
-
+      
 
 
     }
