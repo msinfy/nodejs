@@ -1,14 +1,10 @@
 pipeline {
     agent any
     
-    tools
-    {
-    
-    docker "docker"
-    
-    }
+  
     environment {
       
+        def tool = docker
         registry = "mdshafi/nodejs" 
 
         registryCredential = 'dockerhub'
