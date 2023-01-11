@@ -6,10 +6,10 @@ pipeline {
     environment {
       
 
-       def dockerhost = tool docker
+        def dockerhost = tool docker
         registry = "mdshafi/nodejs" 
 
-        registryCredential = 'docker'
+        registryCredential = 'dockerhub'
       
         CREDENTIALS_ID = 'k8s'
 
